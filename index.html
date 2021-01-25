@@ -1,0 +1,471 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="main.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <script src="https://code.jquery.com/jquery-3.5.1.js"
+        integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <title>passage</title>
+</head>
+
+<body>
+    <!-- OVERLAY -->
+    <DIV class="overlay">
+        <div class="modal">
+            <div class="title">
+                <span id="exit-button" class="material-icons">
+                    clear
+                </span>
+                <h1>OCEAN HIRYU</h1>
+            </div>
+            <div class="vessel-details">
+                <div class="column">
+                    <ul>
+                        <li>MMSI: <span>566594000</span></li>
+                        <li>VESSEL_NAME: <span>OCEAN HIRYU</span></li>
+                        <li>VESSEL_TYPE: <span>Cargo</span></li>
+                        <li>LENGTH: <span>188</span></li>
+                        <li>FLAG_COUNTRY: <span>Singapore</span></li>
+                        <li>DESTINATION: <span>AU MEL</span></li>
+                        <li>DRAUGHT: <span>6.6</span></li>
+                        <li>LONGITUDE: <span>140.16783333333333</span></li>
+                        <li>SOG: <span>11.9</span></li>
+                        <li>ROT: <span>0</span></li>
+                        <li>NAV_STATUS: <span>Under Way Using Engine</span></li>
+                        <li>SOURCE: <span>S-AIS</span></li>
+                        <li>TS_STATIC_UTC: <span>20210125110100</span></li>
+                        <li>DT_POS_UTC: <span>2021-01-25 11:14:14</span></li>
+                        <li>DT_INSERT_UTC: <span>2021-01-25 11:14:28</span></li>
+                        <li>EEID: <span>4820092817336797000</span></li>
+                        <li>SPEED: <span>11.9</span></li>
+                        <li>LON: <span>140.16783333333333</span></li>
+                        <li>ECP: <span>041695</span></li>
+                    </ul>
+                </div>
+                <div class="column">
+                    <ul>
+                        <li>IMO: <span>9263265</span></li>
+                        <li>CALLSIGN: <span>9V6211</span></li>
+                        <li>VESSEL_TYPE_CODE: <span>70</span></li>
+                        <li>VESSEL_CLASS: <span>A</span></li>
+                        <li>WIDTH: <span>32</span></li>
+                        <li>FLAG_CODE: <span>566</span></li>
+                        <li>ETA: <span>2071200</span></li>
+                        <li>LATITUDE: <span>7.642</span></li>
+                        <li>COG: <span>150</span></li>
+                        <li>HEADING: <span>148</span></li>
+                        <li>NAV_STATUS_CODE: <span>0</span></li>
+                        <li>TS_POS_UTC: <span>20210125111414</span></li>
+                        <li>TS_INSERT_UTC: <span>20210125111428</span></li>
+                        <li>DT_STATIC_UTC: <span>2021-01-25 11:01:00</span></li>
+                        <li>VESSEL_TYPE_MAIN: <span>Bulk Carrier</span></li>
+                        <li>MESSAGE_TYPE: <span>1</span></li>
+                        <li>SHIP_ID: <span>566594000</span></li>
+                        <li>LAT: <span>7.642</span></li>
+                        <li>IS APPROVED: <span style="color: red;">No Submitted</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </DIV>
+
+
+    <!-- NAVIGATION BAR -->
+    <DIV class="navbar animate__animated animate__fadeInDown">
+        <div class="logo-container">
+            <img src="https://res.cloudinary.com/iboom/image/upload/v1607394196/passage_mys9h6.png">
+        </div>
+        <div class="nav-items">
+            <p>DASHBOARD</p>
+            <p>REPORTS</p>
+            <p>MAILBOX</p>
+            <p>LOREM</p>
+            <p>IPSUM</p>
+        </div>
+        <div class="nav-icons">
+            <span class="material-icons">
+                person
+            </span>
+            <span class="material-icons">
+                search
+            </span>
+        </div>
+    </DIV>
+
+
+    <!-- MAP AREA -->
+    <DIV class="map animate__animated animate__fadeIn">
+        <div class="floating-controls" style="animation-delay: .8s;">
+            <div class="animate__animated animate__fadeInUp" style="animation-delay: .8s;" id="scroll">
+                <span class="material-icons scroll">
+                    keyboard_arrow_down
+                </span>
+                <p>VIEW VESSEL LISTS</p>
+            </div>
+            <div id="detail-badge" class="animate__animated animate__bounceIn" style="animation-delay: .8s;">
+                <p>Detected vessels (19 in total) at given area</p>
+            </div>
+
+            <div class="map-view">
+                <button class="animate__animated animate__bounceIn" style="animation-delay: .8s;">Map</button>
+                <button class="animate__animated animate__bounceIn" style="animation-delay: .8s;">Satellite</button>
+            </div>
+
+            <div class="map-controls">
+                <button class="animate__animated animate__bounceIn" style="animation-delay: .8s;">
+                    <span class="material-icons">
+                        add
+                    </span>
+                </button>
+                <button class="animate__animated animate__bounceIn" style="animation-delay: .8s;">
+                    <span class="material-icons">
+                        remove
+                    </span>
+                </button>
+                <button class="animate__animated animate__bounceIn" style="margin-top: 15px; animation-delay: .8s;">
+                    <span class="material-icons">
+                        fullscreen
+                    </span>
+                </button>
+            </div>
+        </div>
+
+        <!-- SHIPS -->
+        <div id="container-parent">
+            <div id="container">
+                <span class="material-icons ship-icon">
+                    directions_boat
+                </span>
+                <span class="material-icons ship-icon">
+                    sailing
+                </span>
+                <span class="material-icons ship-icon">
+                    sailing
+                </span>
+                <span class="material-icons ship-icon">
+                    directions_boat
+                </span>
+                <span class="material-icons ship-icon">
+                    directions_boat
+                </span>
+                <span class="material-icons ship-icon">
+                    sailing
+                </span>
+                <span class="material-icons ship-icon">
+                    sailing
+                </span>
+                <span class="material-icons ship-icon">
+                    directions_boat
+                </span>
+                <span class="material-icons ship-icon">
+                    directions_boat
+                </span>
+                <span class="material-icons ship-icon">
+                    sailing
+                </span>
+                <span class="material-icons ship-icon">
+                    sailing
+                </span>
+                <span class="material-icons ship-icon">
+                    directions_boat
+                </span>
+                <span class="material-icons ship-icon">
+                    directions_boat
+                </span>
+                <span class="material-icons ship-icon">
+                    sailing
+                </span>
+                <span class="material-icons ship-icon">
+                    sailing
+                </span>
+                <span class="material-icons ship-icon">
+                    directions_boat
+                </span>
+                <span class="material-icons ship-icon">
+                    sailing
+                </span>
+                <span class="material-icons ship-icon">
+                    sailing
+                </span>
+                <span class="material-icons ship-icon">
+                    directions_boat
+                </span>
+            </div>
+        </div>
+
+
+        <div class="yap-aor animate__animated animate__fadeIn">
+            <img src="https://res.cloudinary.com/iboom/image/upload/v1611558711/Path_1_rlyh8y.png">
+        </div>
+    </DIV>
+
+    <!-- DETAIL LIST SECTION -->
+    <DIV class="vessel-lists">
+        <div>
+            <table id="vessels">
+                <tr>
+                    <th>MMSI</th>
+                    <th>IMO</th>
+                    <th>VESSEL NAME</th>
+                    <th>COUNTRY FLAG</th>
+                    <th>VESSEL TYPE</th>
+                    <th>NAV STATUS</th>
+                    <th>DESTINATION </th>
+                    <th>ETA </th>
+                    <th>EEID</th>
+                    <th>APPROVAL STATUS</th>
+                </tr>
+                <tr>
+                    <td>9685633</td>
+                    <td>ELLENITA</td>
+                    <td>Norway</td>
+                    <td>Cargo</td>
+                    <td>Under Way Using Engine</td>
+                    <td>AU CQP</td>
+                    <td>1301300</td>
+                    <td>4857341913040111000</td>
+                    <td>Germany</td>
+                    <td>No Submitted</td>
+                </tr>
+                <tr>
+                    <td>374267000</td>
+                    <td>9609615</td>
+                    <td>SCARLET ROBIN</td>
+                    <td>Panama</td>
+                    <td>Cargo</td>
+                    <td>Under Way Using Engine </td>
+                    <td>AUHPT</td>
+                    <td>2021600</td>
+                    <td>5156301177743138000</td>
+                    <td>No Submitted</td>
+                </tr>
+                <tr>
+                    <td>538005814</td>
+                    <td>9671931</td>
+                    <td>G. P. ZAFIRAKIS</td>
+                    <td>Marshall Islands</td>
+                    <td>Cargo</td>
+                    <td>Under Way Using Engine</td>
+                    <td>AU NTL</td>
+                    <td>2040300</td>
+                    <td>6566989332376277000</td>
+                    <td>No Submitted</td>
+                </tr>
+                <tr>
+                    <td>9685633</td>
+                    <td>ELLENITA</td>
+                    <td>Norway</td>
+                    <td>Cargo</td>
+                    <td>Under Way Using Engine</td>
+                    <td>AU CQP</td>
+                    <td>1301300</td>
+                    <td>4857341913040111000</td>
+                    <td>Germany</td>
+                    <td>No Submitted</td>
+                </tr>
+                <tr>
+                    <td>374267000</td>
+                    <td>9609615</td>
+                    <td>SCARLET ROBIN</td>
+                    <td>Panama</td>
+                    <td>Cargo</td>
+                    <td>Under Way Using Engine </td>
+                    <td>AUHPT</td>
+                    <td>2021600</td>
+                    <td>5156301177743138000</td>
+                    <td>No Submitted</td>
+                </tr>
+                <tr>
+                    <td>538005814</td>
+                    <td>9671931</td>
+                    <td>G. P. ZAFIRAKIS</td>
+                    <td>Marshall Islands</td>
+                    <td>Cargo</td>
+                    <td>Under Way Using Engine</td>
+                    <td>AU NTL</td>
+                    <td>2040300</td>
+                    <td>6566989332376277000</td>
+                    <td>No Submitted</td>
+                </tr>
+                <tr>
+                    <td>9685633</td>
+                    <td>ELLENITA</td>
+                    <td>Norway</td>
+                    <td>Cargo</td>
+                    <td>Under Way Using Engine</td>
+                    <td>AU CQP</td>
+                    <td>1301300</td>
+                    <td>4857341913040111000</td>
+                    <td>Germany</td>
+                    <td>No Submitted</td>
+                </tr>
+                <tr>
+                    <td>374267000</td>
+                    <td>9609615</td>
+                    <td>SCARLET ROBIN</td>
+                    <td>Panama</td>
+                    <td>Cargo</td>
+                    <td>Under Way Using Engine </td>
+                    <td>AUHPT</td>
+                    <td>2021600</td>
+                    <td>5156301177743138000</td>
+                    <td>No Submitted</td>
+                </tr>
+                <tr>
+                    <td>538005814</td>
+                    <td>9671931</td>
+                    <td>G. P. ZAFIRAKIS</td>
+                    <td>Marshall Islands</td>
+                    <td>Cargo</td>
+                    <td>Under Way Using Engine</td>
+                    <td>AU NTL</td>
+                    <td>2040300</td>
+                    <td>6566989332376277000</td>
+                    <td>No Submitted</td>
+                </tr>
+                <tr>
+                    <td>9685633</td>
+                    <td>ELLENITA</td>
+                    <td>Norway</td>
+                    <td>Cargo</td>
+                    <td>Under Way Using Engine</td>
+                    <td>AU CQP</td>
+                    <td>1301300</td>
+                    <td>4857341913040111000</td>
+                    <td>Germany</td>
+                    <td>No Submitted</td>
+                </tr>
+                <tr>
+                    <td>374267000</td>
+                    <td>9609615</td>
+                    <td>SCARLET ROBIN</td>
+                    <td>Panama</td>
+                    <td>Cargo</td>
+                    <td>Under Way Using Engine </td>
+                    <td>AUHPT</td>
+                    <td>2021600</td>
+                    <td>5156301177743138000</td>
+                    <td>No Submitted</td>
+                </tr>
+                <tr>
+                    <td>538005814</td>
+                    <td>9671931</td>
+                    <td>G. P. ZAFIRAKIS</td>
+                    <td>Marshall Islands</td>
+                    <td>Cargo</td>
+                    <td>Under Way Using Engine</td>
+                    <td>AU NTL</td>
+                    <td>2040300</td>
+                    <td>6566989332376277000</td>
+                    <td>No Submitted</td>
+                </tr>
+                <tr>
+                    <td>9685633</td>
+                    <td>ELLENITA</td>
+                    <td>Norway</td>
+                    <td>Cargo</td>
+                    <td>Under Way Using Engine</td>
+                    <td>AU CQP</td>
+                    <td>1301300</td>
+                    <td>4857341913040111000</td>
+                    <td>Germany</td>
+                    <td>No Submitted</td>
+                </tr>
+                <tr>
+                    <td>374267000</td>
+                    <td>9609615</td>
+                    <td>SCARLET ROBIN</td>
+                    <td>Panama</td>
+                    <td>Cargo</td>
+                    <td>Under Way Using Engine </td>
+                    <td>AUHPT</td>
+                    <td>2021600</td>
+                    <td>5156301177743138000</td>
+                    <td>No Submitted</td>
+                </tr>
+                <tr>
+                    <td>538005814</td>
+                    <td>9671931</td>
+                    <td>G. P. ZAFIRAKIS</td>
+                    <td>Marshall Islands</td>
+                    <td>Cargo</td>
+                    <td>Under Way Using Engine</td>
+                    <td>AU NTL</td>
+                    <td>2040300</td>
+                    <td>6566989332376277000</td>
+                    <td>No Submitted</td>
+                </tr>
+            </table>
+        </div>
+    </DIV>
+
+    <script>
+        $.getJSON('composer.json', function (data) {
+            {}
+        })
+        //scroll to next section
+        $('.scroll').click(function (event) {
+            event.preventDefault();
+            var n = $(document).height();
+            $('html, body').animate({ scrollTop: $(".vessel-lists").offset().top }, 1000);
+        });
+
+        //hide or show overlay
+        $('.overlay').hide();
+        $('#exit-button').click(function () {
+            $('.overlay').fadeOut();
+        })
+        $('#vessels td').click(function () {
+            $('.overlay').fadeIn();
+        })
+        $('.ship-icon').click(function () {
+            $('.overlay').fadeIn();
+        })
+
+        //randomize position of the ships
+        function randomFromTo(from, to) {
+            return Math.floor(Math.random() * (to - from + 1) + from);
+        }
+
+        function moveRandom(e) {
+
+            /* get container position and size
+             * -- access method : cPos.top and cPos.left */
+            var cPos = $('#container').offset();
+            var cHeight = $('#container').height();
+            var cWidth = $('#container').width();
+
+            // get box padding (assume all padding have same value)
+            var pad = parseInt($('#container').css('padding-top').replace('px', ''));
+
+            // get movable box size
+            var bHeight = e.height();
+            var bWidth = e.width();
+
+            // set maximum position
+            maxY = cPos.top + cHeight - bHeight - pad;
+            maxX = cPos.left + cWidth - bWidth - pad;
+
+            // set minimum position
+            minY = cPos.top + pad;
+            minX = cPos.left + pad;
+
+            // set new position			
+            newY = randomFromTo(minY, maxY);
+            newX = randomFromTo(minX, maxX);
+            e.animate({
+                top: newY,
+                left: newX
+            }, 50);
+        }
+
+        $('.ship-icon').each(function () {
+            moveRandom($(this));
+        });
+    </script>
+</body>
+
+</html>
